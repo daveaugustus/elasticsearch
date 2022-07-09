@@ -1,6 +1,9 @@
 package constants
 
 const (
+	YYYYMMDD = "2006-01-02"
+)
+const (
 	PostIndex = "post"
 	UserIndex = "user"
 	ItemIndex = "item"

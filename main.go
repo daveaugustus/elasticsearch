@@ -6,50 +6,69 @@ import (
 	"log"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/olivere/elastic/v7"
 )
 
+func init() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
+
 type Post struct {
-	Title   string `json:"title`
-	Content string `json:"content`
-	Author  string `json:"author`
+	Title   string `json:"title"`
+	Content string `json:"content"`
+	Author  string `json:"author"`
 }
 
 func main() {
-	// Instantiate a client instance of the elastic library
-	client, err := elastic.NewClient(
-		elastic.SetSniff(true),
-		elastic.SetURL("http://localhost:9200"),
-		elastic.SetHealthcheckInterval(5*time.Second),
-	)
-	if err != nil {
-		fmt.Printf("cannot create client: %s.\n", err.Error())
-	}
-
-	// Declare a Context object for the API calls
-	ctx := context.Background()
-	// CreateIndex(ctx, *client)
-	// posts := GetPosts()
-	// for _, post := range posts {
-	// 	if err = SaveDocument(ctx, *client, post); err != nil {
-	// 		log.Printf("cannot create documents: %v", err)
-	// 	}
+	// startDate := time.Now()
+	// endDate := startDate.AddDate(-1, 0, 0)
+	// for d := endDate; d.After(startDate) == false; d = d.AddDate(0, 0, 1) {
+	// 	fmt.Println(d.Format("2006-01-02"))
 	// }
-	// GetDocuments(ctx, *client)
-	resp, err := client.GetMapping().Index("post").Pretty(true).Do(ctx)
-	if err != nil {
-		log.Println("err: ", err)
-	}
-	for i := range resp {
-		nestedMap, ok := resp[i].(map[string]interface{})
-		if ok {
-			log.Printf("Index: %v, Value: %+v\n", i, nestedMap)
-		}
-	}
-	// log.Printf("resp: %+v", resp["post"])
-	// log.Printf("resp: %T", resp["post"])
-	// log.Println("resp", resp["map"].(map[string]interface{})["Author"])
+
+	// fmt.Println(startDate)
+	fmt.Println(time.Now().Format(time.RFC3339))
 }
+
+// func main() {
+// 	// Instantiate a client instance of the elastic library
+// 	client, err := elastic.NewClient(
+// 		elastic.SetSniff(true),
+// 		elastic.SetURL("http://localhost:9200"),
+// 		elastic.SetHealthcheckInterval(5*time.Second),
+// 	)
+// 	if err != nil {
+// 		fmt.Printf("cannot create client: %s.\n", err.Error())
+// 	}
+
+// 	// Declare a Context object for the API calls
+// 	ctx := context.Background()
+// 	// CreateIndex(ctx, *client)
+// 	// posts := GetPosts()
+// 	// for _, post := range posts {
+// 	// 	if err = SaveDocument(ctx, *client, post); err != nil {
+// 	// 		log.Printf("cannot create documents: %v", err)
+// 	// 	}
+// 	// }
+// 	// GetDocuments(ctx, *client)
+// 	resp, err := client.GetMapping().Index("post").Pretty(true).Do(ctx)
+// 	if err != nil {
+// 		log.Println("err: ", err)
+// 	}
+// 	for i := range resp {
+// 		nestedMap, ok := resp[i].(map[string]interface{})
+// 		if ok {
+// 			log.Printf("Index: %v, Value: %+v\n", i, nestedMap)
+// 		}
+// 	}
+// 	// log.Printf("resp: %+v", resp["post"])
+// 	// log.Printf("resp: %T", resp["post"])
+// 	// log.Println("resp", resp["map"].(map[string]interface{})["Author"])
+// }
 
 // CreateIndex
 func CreateIndex(ctx context.Context, client elastic.Client) {
@@ -64,7 +83,7 @@ func CreateIndex(ctx context.Context, client elastic.Client) {
 
 // IndexExists Find out if the Elasticsearch cluster already has the index name there
 func IndexExists(ctx context.Context, client elastic.Client) {
-	exist, err := client.IndexExists(index).Do(ctx)
+	exist, err := client.IndexExists("index").Do(ctx)
 	if err != nil {
 		log.Fatalf("IndexExists() ERROR: %v", err)
 	}
