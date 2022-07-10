@@ -2,9 +2,9 @@ package main
 
 import (
 	"context"
+	"elasticsearch/utils"
 	"fmt"
 	"log"
-	"time"
 
 	"github.com/joho/godotenv"
 	"github.com/olivere/elastic/v7"
@@ -31,7 +31,9 @@ func main() {
 	// }
 
 	// fmt.Println(startDate)
-	fmt.Println(time.Now().Format(time.RFC3339))
+	// fmt.Println(time.Now().Format(time.RFC3339))
+	dates := utils.GetPossibleDates(1, 0, 0, true)
+	fmt.Println(dates)
 }
 
 // func main() {
