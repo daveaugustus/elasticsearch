@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"elasticsearch/constants"
 	"time"
 )
 
@@ -13,14 +14,14 @@ func GetPossibleDates(year, month, day int, past bool) []string {
 	if past {
 		endDate := startDate.AddDate(-year, -month, -day)
 		for d := endDate; d.After(startDate) == false; d = d.AddDate(0, 0, 1) {
-			dates = append(dates, d.Format("2006-01-02"))
+			dates = append(dates, d.Format(constants.YYYYMMDD))
 		}
 		return dates
 	}
 
 	endDate := startDate.AddDate(year, month, day)
 	for d := startDate; d.After(endDate) == false; d = d.AddDate(0, 0, 1) {
-		dates = append(dates, d.Format("2006-01-02"))
+		dates = append(dates, d.Format(constants.YYYYMMDD))
 	}
 	return dates
 }
