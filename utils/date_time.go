@@ -25,3 +25,8 @@ func GetPossibleDates(year, month, day int, past bool) []string {
 	}
 	return dates
 }
+
+// PopulateIndices
+func PopulateIndices(indices []string, data interface{}) {
+
+}
