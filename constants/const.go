@@ -9,6 +9,13 @@ const (
 	ItemIndex = "item"
 )
 
+const (
+	Alphabets      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	AlphaNumeric   = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+	AlphabetsLower = "abcdefghijklmnopqrstuvwxyz"
+	AlphabetsUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+)
+
 const UserIndexMapping = `{
 	"settings":{
 		"number_of_shards": 1,

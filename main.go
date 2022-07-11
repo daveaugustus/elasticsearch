@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"elasticsearch/utils"
+	"elasticsearch/random"
 	"fmt"
 	"log"
 
@@ -32,8 +32,16 @@ func main() {
 
 	// fmt.Println(startDate)
 	// fmt.Println(time.Now().Format(time.RFC3339))
-	dates := utils.GetPossibleDates(1, 0, 0, true)
-	fmt.Println(dates)
+	// dates := utils.GetPossibleDates(1, 0, 0, true)
+	for i := 0; i < 100; i++ {
+		if i == 0 {
+			fmt.Printf("Name\t Email \n")
+		}
+		name := random.NewName()
+		email := random.NewEmail(name)
+		// age := random.NewAge()
+		fmt.Printf("%v\t %v \n", name, email)
+	}
 }
 
 // func main() {
