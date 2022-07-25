@@ -44,3 +44,9 @@ func TestRandomNoNToN(t *testing.T) {
 		})
 	}
 }
+
+func TestRandomNoZeroToN(t *testing.T) {
+	number := RandomNoZeroToN(2)
+	log.Println(number)
+	require.NotZero(t, number)
+}

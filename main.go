@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	"elasticsearch/random"
+	"elasticsearch/models"
 	"fmt"
 	"log"
 
@@ -24,25 +24,21 @@ type Post struct {
 }
 
 func main() {
-	// startDate := time.Now()
-	// endDate := startDate.AddDate(-1, 0, 0)
-	// for d := endDate; d.After(startDate) == false; d = d.AddDate(0, 0, 1) {
-	// 	fmt.Println(d.Format("2006-01-02"))
-	// }
+	users := models.CreateRandomUsers(500)
 
-	// fmt.Println(startDate)
-	// fmt.Println(time.Now().Format(time.RFC3339))
-	// dates := utils.GetPossibleDates(1, 0, 0, true)
-	for i := 0; i < 100; i++ {
-		if i == 0 {
-			fmt.Printf("Name\t Email \n")
-		}
-		name := random.NewName()
-		email := random.NewEmail(name)
-		// age := random.NewAge()
-		fmt.Printf("%v\t %v \n", name, email)
+	for _, v := range users {
+		fmt.Printf("%v\n", v)
 	}
 }
+
+// func randate() time.Time {
+// 	min := time.Date(1970, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+// 	max := time.Date(2070, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+// 	delta := max - min
+
+// 	sec := rand.Int63n(delta) + min
+// 	return time.Unix(sec, 0)
+// }
 
 // func main() {
 // 	// Instantiate a client instance of the elastic library
